@@ -94,17 +94,36 @@ void print(struct node *n){
         }
         
         cout<<"NULL"<<endl;
-     }        
+     }  
+     else
+        cout<<"Empty"<<endl;
+}
+
+void deletelist(struct node * *n){
+    struct node *curr=*n;
+    struct node *k=NULL;
+   
+    while(curr!=NULL){
+        k=curr->next;
+        free(curr);
+        temp=k;
+    }
+    
+    *n=NULL;
+    return;
 }
 
 int main(){
+    
     struct node * head=NULL;
     push(&head,8);
     push(&head,5);
     push(&head,6);
     push(&head,7);
     push(&head,9);
-    delpos(&head,1);
+    print(head);
+    deletelist(&head);
     print(head);
     return 0;
+
 }

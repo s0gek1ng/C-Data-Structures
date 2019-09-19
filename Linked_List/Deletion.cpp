@@ -41,6 +41,49 @@ void del(struct node * *n,int key){
     return;
 }
 
+int listlength(struct node * n){
+    int count=0;
+    if(n==NULL)
+        return count;
+    while(n!=NULL){
+        count++;
+        n=n->next;
+    }    
+    return count;
+}
+
+void delpos(struct node * *n,int pos){
+    struct node *temp= *n;
+    struct node *prev=NULL;
+
+    if(temp==NULL){
+        cout<<"Empty List"<<endl;
+        return;
+    }
+    
+    int len=listlength(temp);
+    if(pos<=len){
+        if(pos==1){
+            *n=temp->next;
+            free(temp);
+            return;
+        }
+        
+        for(int i=1;i<pos;i++){
+            prev=temp;
+            temp=temp->next;
+        }
+        prev->next=temp->next;
+        free(temp);
+        return;
+    }
+    else{
+        cout<<"Out of bound"<<endl;
+        return;
+    }
+        
+}
+
 
 void print(struct node *n){
      
@@ -61,7 +104,7 @@ int main(){
     push(&head,6);
     push(&head,7);
     push(&head,9);
-    del(&head,9);
+    delpos(&head,1);
     print(head);
     return 0;
 }
